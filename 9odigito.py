@@ -10,13 +10,12 @@ class Contato:
 		self.conteudo=arq.readlines()
 		self.nome="NONE"
 		arq.close()
-		# self.arq=open(caminho,'w')
+		self.arq=open(caminho,'w')
 
 	def organiza(self):
 		for i in self.conteudo:
 			if "CHARSET" in i:
 				self.nome=i.split(":")[1].strip().replace(";",'')
-				# print(self.nome)
 			if "CELL" in i:
 				self.numero=i.split(":")[1].strip()
 
@@ -63,4 +62,4 @@ if __name__ == '__main__':
 		i.organiza()
 		i.analisa()
 		i.setNumero()
-		# i.salva()
+		i.salva()
