@@ -10,7 +10,7 @@ class Contato:
 		self.conteudo=arq.readlines()
 		self.nome="NONE"
 		arq.close()
-		self.arq=open(caminho,'w')
+		# self.arq=open(caminho,'w')
 
 	def organiza(self):
 		for i in self.conteudo:
@@ -22,16 +22,22 @@ class Contato:
 
 	def analisa(self):
 		if len(self.numero)>=9:
+			print('----->',self.numero[-8])
 			if self.numero[-9]=='9':
-				print('=',self.nome,self.numero)
-				print()
+				print('OK\t',self.nome,self.numero)
 			else:
-				print(self.nome,self.numero,'+=>',end=' ')
-				print(self.numero[:-8]+'9'+self.numero[-8:])
-				self.numero=self.numero[:-8]+'9'+self.numero[-8:]
+				if self.numero[-8] not in ['3','4']:
+					print('+9+\t',self.nome,self.numero,'+=>',end=' ')
+					print(self.numero[:-8]+'9'+self.numero[-8:])
+					self.numero=self.numero[:-8]+'9'+self.numero[-8:]
+				else:
+					print('FX\t',self.nome,self.numero)
 		else:
-			self.numero="9"+self.numero
-			# print('+>',self.nome,self.numero)
+			if self.numero[0] not in ['3','4']:
+				self.numero="9"+self.numero
+				print('9+\t',self.nome,self.numero)
+			else:
+				print('FX\t',self.nome,self.numero)
 
 
 	def setNumero(self):
@@ -57,4 +63,4 @@ if __name__ == '__main__':
 		i.organiza()
 		i.analisa()
 		i.setNumero()
-		i.salva()
+		# i.salva()
